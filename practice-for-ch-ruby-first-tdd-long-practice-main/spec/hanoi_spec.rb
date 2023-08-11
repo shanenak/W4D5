@@ -1,11 +1,20 @@
 require 'hanoi'
 
 describe TowersOfHanoi do
+    let(:h) {
+        TowersOfHanoi.new(5)
+    }
+
     describe "#initialize" do
-        it "should initialize 3 different arrays of the same length" do
-            
+        let(:stacks) {
+            h.stack_a+h.stack_b+h.stack_c
+        }
+        it "should initialize 3 different arrays" do
+            expect(stacks.length).to eq(h.n)
         end
-        it "should have pre-filled numbers in the first array"
+        it "should have pre-filled numbers in the first array" do
+            expect(stacks.all?{|ele| ele.is_a?(Integer)}).to be(true)
+        end
         it "should not allow any values other than the defined numbers"
         it "should have the other two as empty arrays"
     end
