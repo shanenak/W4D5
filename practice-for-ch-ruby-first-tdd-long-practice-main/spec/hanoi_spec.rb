@@ -1,7 +1,7 @@
 require 'hanoi'
 
 describe TowersOfHanoi do
-    before(:each) {@h = TowersOfHanoi.new(5)}
+    before(:each) {@h = TowersOfHanoi.new(3)}
 
     describe "#initialize" do
         let(:stacks) {
@@ -32,11 +32,32 @@ describe TowersOfHanoi do
             expect(@h.stack_b.last).to eq(disc_stack_a)
             expect(@h.stack_b[-2]).to eq(disc_stack_b)
         end
-        it "should not change the other array"
+        it "should not change the other array" do
+            disc_stack_a = @h.stack_a.last
+            disc_stack_b = @h.stack_b.last
+            @h.move(0,2)
+            expect(@h.stack_b.last).to eq(disc_stack_b)
+        end
     end
 
-    describe "#won" do
-        it "should check the order of the discs on the final array"
-        it "should print out a message when player wins"
+    describe "#won?" do
+        it "should not consider stack a's arrangement as a win" do
+            expect(@h.won?).to be(false)
+        end
+        it "should check the order of the discs on the final array" do
+            @h.move(0,2)
+            @h.move(0,1)
+            expect(@h.won?).to be(false)
+
+            @h.move(2,1)
+            @h.move(0,2)
+            @h.move(1,0)
+            expect(@h.won?).to be(false)
+
+            @h.move(1,2)
+            @h.move(0,2)
+            expect(@h.won?).to be(true)
+            expect(@h.stack_a).to eq([])
+        end
     end
 end
