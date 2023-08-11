@@ -37,4 +37,37 @@ describe Array do
             end
         end
     end
+
+    describe "#two_sum" do
+        before(:each) {
+            @arr = [-1, 0, 2, -2, 1]
+        }
+        context "With no pairs" do
+            it "should handle an empty array" do
+                expect([].two_sum).to eq([])
+            end
+
+            it "should handle no pairs" do
+                expect([1,2,3].two_sum).to eq([])
+            end
+        end
+
+        context "With pairs" do
+            it "should return correct number of pairs" do
+                expect(@arr.two_sum.length).to eq(2)
+            end
+            it "should order smaller index first" do
+                expect(@arr.two_sum).to eq([[0, 4], [2, 3]])
+            end
+            
+            it "should not consider an element twice" do
+                expect(@arr.two_sum).not_to include([0,0])
+            end
+
+            it "should not include duplicate pairs" do
+                two_sum_res = @arr.two_sum
+                expect(two_sum_res[0]).not_to eq(two_sum_res[1])
+            end
+        end
+    end
 end
