@@ -14,4 +14,16 @@ class Array
         }
         res_arr
     end
+
+    def my_transpose
+        return [] if self.empty?
+        raise "not a square matrix" if self.length != self[0].length
+        res_arr = Array.new(self.length) {Array.new(self.length)}
+        (0...self.length).each do |i|
+            (0...self.length).each do |j|
+                res_arr[i][j] = self[j][i]
+            end
+        end
+        res_arr
+    end
 end

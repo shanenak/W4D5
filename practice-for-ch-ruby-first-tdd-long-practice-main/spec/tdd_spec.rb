@@ -70,4 +70,24 @@ describe Array do
             end
         end
     end
+
+    describe "#my_transpose" do
+        before(:each) {@arr = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]}
+        it "should handle an empty array" do
+            expect([].my_transpose).to eq([])
+        end
+
+        it "should raise exception when row is not equal to column" do
+            expect { [[1, 2, 3], [4, 5]].my_transpose }.to raise_error("not a square matrix")
+        end
+
+        it "should return the transposed array" do
+            expect(@arr.my_transpose).to eq([[0, 3, 6],[1, 4, 7], [2, 5, 8]])
+        end
+
+        it "should not call the default transpose method" do
+            expect(@arr).not_to receive(:transpose)
+            @arr.my_transpose
+        end
+    end
 end
