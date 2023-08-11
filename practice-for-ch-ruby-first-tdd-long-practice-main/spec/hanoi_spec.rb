@@ -8,7 +8,7 @@ describe TowersOfHanoi do
             @h.stack_a+@h.stack_b+@h.stack_c
         }
         it "should initialize 3 different arrays" do
-            expect(stacks.length).to eq(@h.n)
+            expect(stacks.length).to eq(3)
         end
         it "should have pre-filled numbers in the first array" do
             expect(stacks.all?{|ele| ele.is_a?(Integer)}).to be(true)
@@ -42,21 +42,21 @@ describe TowersOfHanoi do
 
     describe "#won?" do
         it "should not consider stack a's arrangement as a win" do
-            expect(@h.won?).to be(false)
+            expect(@h.won?(2)).to be(false)
         end
         it "should check the order of the discs on the final array" do
             @h.move(0,2)
             @h.move(0,1)
-            expect(@h.won?).to be(false)
+            expect(@h.won?(2)).to be(false)
 
             @h.move(2,1)
             @h.move(0,2)
             @h.move(1,0)
-            expect(@h.won?).to be(false)
+            expect(@h.won?(2)).to be(false)
 
             @h.move(1,2)
             @h.move(0,2)
-            expect(@h.won?).to be(true)
+            expect(@h.won?(2)).to be(true)
             expect(@h.stack_a).to eq([])
         end
     end
