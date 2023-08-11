@@ -26,4 +26,21 @@ class Array
         end
         res_arr
     end
+
+    def stock_picker
+        return nil if self.empty?
+        raise "Stock price should be above zero" if self.any?{|ele| ele <= 0}
+        max_profit_idxs = []
+        max_profit = 0
+        (0...self.length).each{|first|
+            (first+1...self.length).each{|sec|
+                current_profit  = self[sec] - self[first]
+                if current_profit > max_profit
+                    max_profit_idxs = [first, sec]
+                    max_profit=current_profit
+                end
+            }
+        }
+        return max_profit_idxs
+    end
 end

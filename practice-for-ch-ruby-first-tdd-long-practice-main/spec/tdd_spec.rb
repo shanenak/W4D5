@@ -1,4 +1,5 @@
 require 'tdd'
+
 describe Array do 
     describe "#my_uniq" do
         # let(:arr) { Array.new() }
@@ -88,6 +89,30 @@ describe Array do
         it "should not call the default transpose method" do
             expect(@arr).not_to receive(:transpose)
             @arr.my_transpose
+        end
+    end
+
+    describe "#stock_picker" do
+
+        before(:each) {
+            @stocks = [7,1,5,3,6,4]
+        }
+
+        it "should return nil if empty array" do
+            expect([].stock_picker).to be_nil
+        end
+        it "should raise an error if price less than or equal to zero" do 
+            expect {[1,2,0,3,4,5].stock_picker}.to raise_error("Stock price should be above zero")
+        end
+        it "should return an array of length two" do
+            expect(@stocks.stock_picker.length).to eq(2)
+        end
+        it "should return the most profitable pair of days" do
+            expect(@stocks.stock_picker).to eq([1,4])
+        end
+        it "should not sell before you can buy" do
+            first, sec = @stocks.stock_picker
+            expect(first).to be < sec
         end
     end
 end
